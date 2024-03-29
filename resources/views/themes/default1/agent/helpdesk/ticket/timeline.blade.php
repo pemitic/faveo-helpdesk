@@ -138,14 +138,14 @@ if ($thread->title != "") {
 
             if ($group->can_edit_ticket == 1) {
                 ?>
-            <button type="button" class="btn btn-sm btn-default btn-tool">
+            <button type="button" class="btn btn-sm btn-default btn-tool" data-toggle="modal" data-target="#Edit">
 
                 <i class="fas fa-edit" style="color:green;"></i> {{trans('lang.edit')}}
 
             </button>            <?php } ?>
 
             <?php if ($group->can_assign_ticket == 1) { ?>
-            <button type="button" class="btn btn-sm btn-default btn-tool">
+            <button type="button" class="btn btn-sm btn-default btn-tool" data-toggle="modal" data-target="#assign{{$tickets->id}}">
 
                 <i class="fas fa-hand-point-right" style="color:orange;"></i> {{trans('lang.assign')}}
 
@@ -237,11 +237,13 @@ if ($thread->title != "") {
                     <b>{!! Lang::get('lang.due_date') !!}: </b>
                     <?php
                     $duedate = $tickets->duedate;
-                    $user_timezone = new DateTimeZone('Asia/Kolkata');
+                    // $user_timezone = new DateTimeZone('Asia/Kolkata');
+                    $user_timezone = new DateTimeZone('Europe/Belgrade');
                     $time = date_create($tickets->duedate, $user_timezone);
                     date_add($time, date_interval_create_from_date_string($SlaPlan->grace_period));
                     date_add($time, date_interval_create_from_date_string('30 minutes'));
-                    echo $time->format('Y-m-d H:i:s');
+                    // echo $time->format('Y-m-d H:i:s');
+                    echo UTC::usertimezone($time->format('c'));
                     ?>
                 </div>
                 <div class="col-md-3">
