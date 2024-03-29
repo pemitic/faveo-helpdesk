@@ -242,8 +242,7 @@ if ($thread->title != "") {
                     $time = date_create($tickets->duedate, $user_timezone);
                     date_add($time, date_interval_create_from_date_string($SlaPlan->grace_period));
                     date_add($time, date_interval_create_from_date_string('30 minutes'));
-                    // echo $time->format('Y-m-d H:i:s');
-                    echo UTC::usertimezone($time->format('c'));
+                    echo UTC::usertimezone($time->format('c'));  // echo $time->format('Y-m-d H:i:s');
                     ?>
                 </div>
                 <div class="col-md-3">
