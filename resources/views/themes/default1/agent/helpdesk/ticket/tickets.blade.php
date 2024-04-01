@@ -422,4 +422,29 @@ if (Request::has('assigned'))
     }
     });
 </script>
+<script>
+var timer;
+function myTimer(sec) {
+    if (timer) clearInterval(timer);
+    timer = setInterval(function() {
+        $('#time_to_refresh').text(sec--);
+        if (sec == -1) {
+            location.reload(true);
+            // clearInterval(timer);
+        }
+    }, 1000);
+}
+
+$(document).ready(function () {
+    var el = $('.card-body > button :first').parent();
+    $('<button type="button" class="btn btn-sm btn-default text-green mr-1" id="reset_timer"><i class="fas fa-clock"></i> Reset > Time to refresh page: <b><span id="time_to_refresh"></span></b> sec. </button></div>').insertBefore(el);
+    $('body').on('click', '#reset_timer', function() {
+        myTimer(30);
+    });
+    $(document).mousemove(function(e){
+        myTimer(30);
+    });
+    myTimer(30);
+});
+</script>
 @stop
