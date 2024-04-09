@@ -565,4 +565,27 @@ class="nav-item d-none d-sm-inline-block active"
 		});
 	});
 </script>
+<script>
+var timer;
+function myTimer(sec) {
+    if (timer) clearInterval(timer);
+    timer = setInterval(function() {
+        $('#dashboard_time_to_refresh').text(sec--);
+        if (sec == -1) {
+            location.reload(true);
+            // clearInterval(timer);
+        }
+    }, 1000);
+}
+
+$(document).ready(function () {
+    var el = $('.content-header').find('h1:eq(1)');
+    var elContent = $(el).html();
+    $(el).html(elContent + '<span id="dashboard_reset_timer"> (<b><span id="dashboard_time_to_refresh"></span></b> sec.)</span>');
+    $(document).mousemove(function(e){
+        myTimer(30);
+    });
+    myTimer(30);
+});
+</script>
 @stop
