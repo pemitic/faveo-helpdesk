@@ -197,6 +197,7 @@ class MailController extends Controller
         }
         $body = $this->separateReply($body);
         $subject = $message->getSubject();
+        $subject = iconv_mime_decode($subject, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
         $address = $message->getAddresses('reply-to');
         if (!$address) {
             $address = $message->getAddresses('from');
@@ -211,6 +212,7 @@ class MailController extends Controller
     {
         $fromaddress = checkArray('address', $address[0]);
         $fromname = checkArray('name', $address[0]);
+        $fromname = iconv_mime_decode($fromname, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
         $helptopic = $this->helptopic($email);
         $sla = $this->sla($email);
         $priority = $this->priority($email);
@@ -318,6 +320,7 @@ class MailController extends Controller
         if ($collaborator_cc) {
             foreach ($collaborator_cc as $cc) {
                 $name = checkArray('name', $cc);
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
                 $address = checkArray('address', $cc);
                 $cc_array[$address] = $name;
             }
@@ -325,6 +328,7 @@ class MailController extends Controller
         if ($collaborator_bcc) {
             foreach ($collaborator_bcc as $bcc) {
                 $name = checkArray('name', $bcc);
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
                 $address = checkArray('address', $bcc);
                 $bcc_array[$address] = $name;
             }
@@ -332,6 +336,7 @@ class MailController extends Controller
         if ($collaborator_to) {
             foreach ($collaborator_to as $to) {
                 $name = checkArray('name', $to);
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
                 $address = checkArray('address', $to);
                 $to_array[$address] = $name;
             }
