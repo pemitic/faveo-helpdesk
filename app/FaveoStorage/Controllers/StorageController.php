@@ -237,6 +237,7 @@ class StorageController extends Controller
                     $size = $attachment->getSize();
                     $data = file_get_contents($attachment->getRealPath());
                 }
+                $filename = iconv_mime_decode($filename, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
                 $this->upload($data, $filename, $type, $size, $disposition, $thread_id);
                 $thread = $this->updateBody($attachment, $thread_id, $filename);
             }
