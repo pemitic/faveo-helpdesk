@@ -211,6 +211,7 @@ class MailController extends Controller
     public function workflow($address, $subject, $body, $collaborator, $attachments, $email)
     {
         $fromaddress = checkArray('address', $address[0]);
+        $fromaddress = iconv_mime_decode($fromaddress, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
         $fromname = checkArray('name', $address[0]);
         $fromname = iconv_mime_decode($fromname, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); // konverzija iz MIME u UTF-8 
         $helptopic = $this->helptopic($email);
