@@ -67,6 +67,16 @@ class="nav-link active"
                         {data: "Actions"}
                     ]
                 });
+                // 2. Delegate the click event to open the modal
+                jQuery('#socialTable').on('click', '[data-toggle="modal"]', function (e) {
+                    e.preventDefault();
+                    
+                    // Get the target modal ID (e.g., #edit_widget19)
+                    var targetModal = jQuery(this).attr('data-target');
+                    
+                    // Open the Bootstrap modal manually
+                    jQuery(targetModal).modal('show');
+                });
             });
         </script>
     </div>
